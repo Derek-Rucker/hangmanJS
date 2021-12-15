@@ -43,35 +43,41 @@ export class AppComponent implements OnInit {
   maxGuess: number;
   numGuess: number;
   lettersLeft: number;
-  alreadyGuessed: string[];
+  success: boolean;
+  newGame: boolean;
+  lastGuess: string;
+  clicked: boolean;
   constructor(private _router: Router) {}
 
   ngOnInit(): void {
     this.generateRandomWord();
     this.answerArr = [];
-    this.alreadyGuessed = [];
     for (let i = 0; i < this.wordToGuess.length; i++) {
       this.answerArr.push('___');
     }
     this.maxGuess = 6;
     this.numGuess = 0;
     this.lettersLeft = this.wordToGuess.length;
+    this.newGame = true;
+    this.clicked = false;
   }
 
   guessLetter(letter: string) {
-    if (!this.alreadyGuessed.includes(letter)) {
-      if (this.wordToGuessArr.includes(letter)) {
-        this.displayLetter(letter);
-        console.log('Good guess!');
-        console.log(this.answerArr);
-      } else {
-        console.log('Try again!');
-        this.numGuess++;
-      }
-      this.alreadyGuessed.push(letter);
+    this.newGame = false;
+    this.lastGuess = letter;
+    document.getElementById(letter)?.setAttribute('disabled', 'disabled');
+    if (this.wordToGuessArr.includes(letter)) {
+      this.displayLetter(letter);
+      this.success = true;
+      console.log(this.answerArr);
     } else {
-      alert('You already guessed that letter!');
+      this.success = false;
+      this.numGuess++;
     }
+    this.continueGame();
+  }
+
+  continueGame() {
     if (this.lettersLeft == 0) {
       alert('You win!');
       window.location.reload();

@@ -1,22 +1,33 @@
-<h1>HangmanJS (with Angular!)</h1>
-<div fxLayout="center center">
-  <p>
-    This is hangman. A random word will be selected and you'll have to click the
-    letters below to guess what that word is. Be careful! You only have 6
-    chances!
-  </p>
-</div>
-<div class="buttons" fxLayout="row center center space-around">
-  <!-- <app-letter-tiles></app-letter-tiles> -->
-  <mat-card
-    class="letters"
-    *ngFor="let letter of letters"
-    fxLayout="row"
-    (click)="guessLetter(letter)"
-  >
-    <button class="mdc-button mdc-button--raised">
-      {{ letter }}
-    </button>
-  </mat-card>
-</div>
-<div *ngFor="let toGuess of answerArr" class="answer">{{ toGuess }}</div>
+<mat-card>
+  <h1>HangmanJS (with Angular!)</h1>
+  <div fxLayout="center center">
+    <p class="description">
+      This is hangman. A random word will be selected and you'll have to click
+      the letters below to guess what that word is. Be careful! You only have 6
+      chances!
+    </p>
+  </div>
+  <div class="guessesLeft">Guesses Left: {{ maxGuess - numGuess }}</div>
+  <div *ngIf="!newGame">
+    Last guess: {{ lastGuess }}
+    <span *ngIf="success"> Good guess! </span>
+    <span *ngIf="!success"> Try again! </span>
+  </div>
+  <div fxLayout="row center center" fxLayoutGap="5px">
+    <!-- <app-letter-tiles></app-letter-tiles> -->
+    <div class="letters" *ngFor="let letter of letters">
+      <button
+        class="mdc-button mdc-button--raised"
+        id="{{ letter }}"
+        (click)="guessLetter(letter)"
+      >
+        {{ letter }}
+      </button>
+    </div>
+  </div>
+  <div class="answer" fxLayout="row center center" fxLayoutGap="5px">
+    <div *ngFor="let toGuess of answerArr">
+      {{ toGuess }}
+    </div>
+  </div>
+</mat-card>
