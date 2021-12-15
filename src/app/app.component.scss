@@ -1,0 +1,22 @@
+@use "@material/button/styles";
+
+.answer {
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.guessesLeft {
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+mat-card {
+  padding: 10px;
+  margin: 15px;
+}
+
+.description {
+  display: flex;
+  align-content: center;
+}
