@@ -13,33 +13,8 @@ export class LetterTilesComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.letters = [
-      'a',
-      'b',
-      'c',
-      'd',
-      'e',
-      'f',
-      'g',
-      'h',
-      'i',
-      'j',
-      'k',
-      'l',
-      'm',
-      'n',
-      'o',
-      'p',
-      'q',
-      'r',
-      's',
-      't',
-      'u',
-      'v',
-      'w',
-      'x',
-      'y',
-      'z',
-    ];
+    this.letters = Array.from({ length: 26 }, (_, i) =>
+      String.fromCharCode('A'.charCodeAt(0) + i)
+    );
   }
 }
